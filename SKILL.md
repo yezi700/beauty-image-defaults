@@ -3,7 +3,7 @@ name: beauty-image-defaults
 description: 为明确成年女性的轻熟女、人妻感、熟女方向生成、改写或编辑人像与自媒体视觉人设提示词；支持男性受众导向，参考人物身份优先。Use for adult female portrait and creator-persona prompts; exclude minors, male portraits, animals and product-only images.
 ---
 
-# Beauty Image Defaults V2
+# Beauty Image Defaults
 
 面向成年女性自媒体视觉人设的 Prompt Art Direction Skill。
 帮助人物具有成熟魅力、身体吸引力、记忆点和可持续更新的一致性。

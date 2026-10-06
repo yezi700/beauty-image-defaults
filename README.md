@@ -1,4 +1,4 @@
-# Beauty Image Defaults V2
+# Beauty Image Defaults
 
 **Adult Female Creator Persona & Portrait Prompt Skill**
 
@@ -9,7 +9,7 @@
 **本 Skill 不是色情内容生成工具。** 目标是成熟女性魅力、人物人设、视觉吸引力、平台友好与系列一致性。
 男性注意力设计是可选创作方向，不保证停留率或审核通过，也不把所有男性视为同一种偏好。
 
-## V2 能力
+## 核心能力
 
 | 能力 | 行为 |
 |---|---|
@@ -56,7 +56,7 @@ New-Item -ItemType Directory -Force -Path $skillRoot | Out-Null
 git clone https://github.com/yezi700/beauty-image-defaults.git (Join-Path $skillRoot 'beauty-image-defaults')
 ```
 
-命令安装远端版本；本地 V2 尚未推送时，应将本次修改后的完整目录复制到技能目录测试。
+命令安装仓库当前版本；测试尚未发布的本地修改时，可将修改后的完整目录复制到技能目录。
 也可让内置 `$skill-installer` 从该 GitHub 仓库安装。安装后在新对话通过 `$beauty-image-defaults` 调用；未出现时重启 Codex。
 
 ## 示例请求
