@@ -1,6 +1,6 @@
 ---
 name: beauty-image-defaults
-description: 为明确成年女性的轻熟女、人妻感、熟女方向生成、改写或编辑人像与自媒体视觉人设提示词；支持男性受众导向，参考人物身份优先。Use for adult female portrait and creator-persona prompts; exclude minors, male portraits, animals and product-only images.
+description: 为美女图片、成熟女性写真、女性角色和女模特图提供默认人物描述与人像美术指导。生成、编辑、补全或改写明确成年女性人像提示词时使用；有附件人物时保留参考人物特征，无人物参考且用户未指定时补充默认画像。Use when generating or editing adult female portraits, or refining their prompts, with reference-person preservation and defaults for unspecified traits.
 ---
 
 # Beauty Image Defaults
@@ -13,14 +13,16 @@ description: 为明确成年女性的轻熟女、人妻感、熟女方向生成�
 
 ## 1. 先判断任务是否适用
 
-适用：明确成年女性为主要人物，要求轻熟、生活成熟或成熟优雅方向的提示词。
-包括新写、补全、改写 Prompt、参考人物编辑和账号人设设计。
+适用：生成美女图片、补全图片提示词、改写图片提示词或细化女性角色外观，
+且明确成年女性为主要人物时。包括新写、补全、改写 Prompt、参考人物编辑和账号人设设计。
+先区分交付物：提示词、新图或已有图片修改。用户只要提示词时不生成图片；只修改 Skill 内容时不启动图片验证。
 用户明确调用本 Skill 创建无参考新角色时，可明确设为成年后继续。
 
 不适用：男性肖像、儿童、动物主体、普通产品图、建筑效果图。
 成年女性只是背景小元素时，通常不触发。
 普通女性人像没有成熟方向或人设需求时，不主动套用此审美。
 修改本 Skill 的文档任务只处理文本，不调用生图。
+生成方向为审美人像、写真、时尚、生活方式或角色设计，不主动加入裸露、性行为或露骨色情内容。
 
 先确认成年语义，再路由模式；不能用默认年龄替年龄模糊的参考人物补成年身份。
 “女孩 / 少女 / 高中生 / 校服少女 / 未成年”不得自动成熟化或应用性感增强。
@@ -29,7 +31,8 @@ description: 为明确成年女性的轻熟女、人妻感、熟女方向生成�
 
 ## 2. 核心优先级
 
-在上述适用范围内，逐属性解决冲突：
+人物属性按以下顺序确定，兼容原版三层：用户明确要求 > 参考人物 > 默认画像。
+在上述适用范围内，逐属性展开为：
 
 用户当前明确要求
 > 当前人物参考图
@@ -43,6 +46,28 @@ description: 为明确成年女性的轻熟女、人妻感、熟女方向生成�
 用户只改某个属性时，其他属性继续沿用原来源。
 明确年龄、发型或体型修改可以覆盖对应锁定项，但不连带重做人物。
 当前参考图只有承担人物身份参考时才进入身份优先级；背景图不承担身份。
+默认画像为明确成年人；不能因为默认年龄是 30 岁，就把参考人物自动改成 30 岁。
+
+无人物参考时，可直接使用或按用户设定改写下面这段（兼容原版默认）：
+
+```text
+一位 30 岁左右的亚洲成熟女性，轻熟气质，皮肤白皙细腻，黑色头发，戴眼镜；
+脸型偏长但下巴不尖，面部轮廓圆润柔和；身材丰满但不肥胖，胸部更丰盈饱满，
+臀部更大且曲线明显，腿长，整体比例协调，自然优雅，写实审美人像风格。
+```
+
+有人物参考时，可使用下面的结构：
+
+```text
+以附件中的人物为身份参考，保留其五官特征、年龄观感、肤色、
+发色与发型、眼镜状态，以及参考图中可见的身体比例。
+保留原图的表情、服装、动作、构图和画风；明确要求修改的部分除外。
+本次场景或修改要求：【填写用户要求】。
+画幅与必须入画的部分：【填写构图要求】。
+光线、材质与画面问题：【只填写与当前任务相关的内容】。
+```
+
+完整 Hard / Soft 默认表见 [defaults](references/defaults.md)，只补充缺失属性，不整段追加。
 
 ## 3. 分开解析 Age 与 Mode
 
@@ -67,8 +92,8 @@ Mode：用户明确模式 > 已锁定账号人设 > 核心气质 > 内容场景 
 
 ## 4. 判断男性注意力层
 
-记录 audience_attention 为 off / general / male-directed，作为内部创作标签。
-用户明确男性受众、男性向账号、吸引男性停留时用 male-directed。
+只在用户明确男性受众、男性向账号、吸引男性停留时做男性向；否则不假定。
+内部可记 audience_attention 为 off / general / male-directed，仅用于路由，不必向用户展示。
 封面、引流或首图但未指定受众时用 general，优化可读性，不擅自假定男性向。
 普通人像或局部编辑默认 off；用户要求克制、职业或去性感时优先执行。
 已有账号明确锁定男性受众时可沿用，当前用户要求可覆盖。
@@ -93,7 +118,7 @@ male-directed 时，挑选一至两个主要吸引来源：
 |---|---|---|
 | 自动判档、混合气质、模式差异 | [modes](references/modes.md) | 视觉向量与路由 |
 | 无参考且缺少属性 | [defaults](references/defaults.md) | 硬规则与可覆盖软默认 |
-| 新建账号、人设定位、记忆点 | [persona-archetypes](references/persona-archetypes.md) | 12 种人设起点 |
+| 新建账号、人设定位、记忆点（可选，简单改写不建账号） | [persona-archetypes](references/persona-archetypes.md) | 12 种人设起点 |
 | 曲线、体型、合身剪裁、男性注意力 | [body-emphasis](references/body-emphasis.md) | 整体视觉塑形 |
 | 性感、风情、男性注意力 | [platform-safe-sensuality](references/platform-safe-sensuality.md) | 成年与表达边界 |
 | 封面、首图、缩略图、Feed 首屏 | [attention-composition](references/attention-composition.md) | 焦点与裁切 |

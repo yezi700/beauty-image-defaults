@@ -44,8 +44,9 @@
 
 ## Codex 安装
 
-将完整目录放入个人 `~/.agents/skills/beauty-image-defaults`，或项目 `.agents/skills/beauty-image-defaults`。
+推荐将完整目录放入个人 `~/.agents/skills/beauty-image-defaults`，或项目 `.agents/skills/beauty-image-defaults`。
 不要只复制 SKILL.md：references 是按需读取所必需的。避免同名旧版与新版重复安装。
+兼容原版单文件用法：仅体验默认画像与美术指导时，可只复制 `SKILL.md` 第 2 节的两段模板；完整路由、人设、adapter 与 eval 需要整仓。
 安装位置与发现机制参见 [官方技能文档](https://learn.chatgpt.com/docs/build-skills)（核对于 2026-10-07）。
 
 PowerShell 个人安装示例（目标目录已存在时先检查旧安装，不覆盖）：
